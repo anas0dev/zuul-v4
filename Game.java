@@ -37,18 +37,18 @@ public class Game
 
       
         // create the rooms
-        Room cocoyashi = new Room("Bienvenu à cocoyashi");
-        Room nooberland = new Room("Bienvenu à nooberland");
-        Room wano_kuni = new Room("Bienvenu à wano_kuni");
-        Room water7 = new Room("Bienvenu à water7");
-        Room kalen = new Room("Bienvenu à kalen");
-        Room ortopia = new Room("Bienvenu à ortopia");
-        Room alabasta = new Room("Bienvenu à alabasta");
-        Room krakenland = new Room("Bienvenu à krakenland");
-        Room amazone_lily = new Room("Bienvenu à amazone_lily");
-        Room skypia = new Room("Bienvenu à skypia");
-        Room paris8 = new Room("Bienvenu à paris8");
-        Room rafel = new Room("Bienvenu à rafel");
+        Room cocoyashi = new Room("Bienvenue à Cocoyashi");
+        Room nooberland = new Room("Bienvenue à Nooberland");
+        Room wano_kuni = new Room("Bienvenue à Wano_kuni");
+        Room water7 = new Room("Bienvenue à Water7");
+        Room kalen = new Room("Bienvenue à Kalen");
+        Room ortopia = new Room("Bienvenue à Ortopia");
+        Room alabasta = new Room("Bienvenue à Alabasta");
+        Room krakenland = new Room("Bienvenue à Krakenland");
+        Room amazone_lily = new Room("Bienvenue à Amazone_lily");
+        Room skypia = new Room("Bienvenue à Skypia");
+        Room paris8 = new Room("Bienvenue à Paris8");
+        Room rafel = new Room("Bienvenue à Rafel, ~votre log pose n'arrête pas de s'agiter ...~");
         
         // initialise room exits
         cocoyashi.setExits(nooberland, null, null, null, null, null, null, null);
@@ -191,7 +191,7 @@ public class Game
     
     private void printLocationInfo () 
     {
-    	System.out.println("You are " + currentRoom.getDescription());
+    	System.out.println(currentRoom.getDescription());
         System.out.print("Exits: ");
         if(currentRoom.northExit != null)
             System.out.print("north ");
