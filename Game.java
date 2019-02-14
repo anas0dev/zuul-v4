@@ -37,18 +37,18 @@ public class Game
 
       
         // create the rooms
-        Room cocoyashi = new Room("Bienvenue à Cocoyashi");
-        Room nooberland = new Room("Bienvenue à Nooberland");
-        Room wano_kuni = new Room("Bienvenue à Wano_kuni");
-        Room water7 = new Room("Bienvenue à Water7");
-        Room kalen = new Room("Bienvenue à Kalen");
-        Room ortopia = new Room("Bienvenue à Ortopia");
-        Room alabasta = new Room("Bienvenue à Alabasta");
-        Room krakenland = new Room("Bienvenue à Krakenland");
-        Room amazone_lily = new Room("Bienvenue à Amazone_lily");
-        Room skypia = new Room("Bienvenue à Skypia");
-        Room paris8 = new Room("Bienvenue à Paris8");
-        Room rafel = new Room("Bienvenue à Rafel, ~votre log pose n'arrête pas de s'agiter ...~");
+        Room cocoyashi = new Room("Cocoyashi");
+        Room nooberland = new Room("Nooberland");
+        Room wano_kuni = new Room("Wano_kuni");
+        Room water7 = new Room("Water7");
+        Room kalen = new Room("Kalen");
+        Room ortopia = new Room("Ortopia");
+        Room alabasta = new Room("Alabasta");
+        Room krakenland = new Room("Krakenland");
+        Room amazone_lily = new Room("Amazone_lily");
+        Room skypia = new Room("Skypia");
+        Room paris8 = new Room("Paris8");
+        Room rafel = new Room("Rafel, ~votre log pose n'arrête pas de s'agiter ...~");
         
         // initialise room exits
         cocoyashi.setExits(nooberland, null, null, null, null, null, null, null);
@@ -82,7 +82,7 @@ public class Game
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
-        System.out.println("Thank you for playing.  Good bye.");
+        System.out.println("Merci d'avoir joué, à très vite !");
     }
 
     /**
@@ -91,11 +91,12 @@ public class Game
     private void printWelcome()
     {
         System.out.println();
-        System.out.println("Welcome to the World of Zuul!");
-        System.out.println("World of Zuul is a new, incredibly boring adventure game.");
-        System.out.println("Type 'help' if you need help.");
+        System.out.println("Bienvenue dans One Piece treasure");
+        System.out.println("Imergez vous dans une odyssée de pirate purement ludique et palpitante");
+        System.out.println("Taper 'help' si vous avez besoin de messages.");
         System.out.println();
-        printLocationInfo();
+        System.out.print("Bienvenue à " + currentRoom.getExitString());
+        System.out.println();
     }
 
     /**
@@ -117,6 +118,10 @@ public class Game
             printHelp();
         else if (commandWord.equals("go"))
             goRoom(command);
+        else if (commandWord.equals("look"))
+            look();
+        else if (commandWord.equals("eat"))
+            eat();
         else if (commandWord.equals("quit"))
             wantToQuit = quit(command);
 
@@ -156,28 +161,28 @@ public class Game
         // Try to leave current room.
         Room nextRoom = null;
         if(direction.equals("north")) {
-            nextRoom = currentRoom.northExit;
+            nextRoom = currentRoom.getExit("north");
         }
         if(direction.equals("east")) {
-            nextRoom = currentRoom.eastExit;
+            nextRoom = currentRoom.getExit("east");
         }
         if(direction.equals("south")) {
-            nextRoom = currentRoom.southExit;
+            nextRoom = currentRoom.getExit("south");
         }
         if(direction.equals("west")) {
-            nextRoom = currentRoom.westExit;
+        	nextRoom = currentRoom.getExit("west");
         }
         if(direction.equals("northwest")) {
-            nextRoom = currentRoom.northWestExit;
+            nextRoom = currentRoom.getExit("northwest");
         }
         if(direction.equals("northeast")) {
-            nextRoom = currentRoom.northEastExit;
+            nextRoom = currentRoom.getExit("northeast");
         }
         if(direction.equals("southwest")) {
-            nextRoom = currentRoom.southWestExit;
+            nextRoom = currentRoom.getExit("southwest");
         }
         if(direction.equals("southeast")) {
-            nextRoom = currentRoom.southEastExit;
+            nextRoom = currentRoom.getExit("southeast");
         }
 
         if (nextRoom == null) {
@@ -185,31 +190,25 @@ public class Game
         }
         else {
             currentRoom = nextRoom;
-            printLocationInfo();
+            System.out.print("Bienvenue à " + currentRoom.getExitString());
+            System.out.println();	
         }
     }
-    
-    private void printLocationInfo () 
+    /**
+     * Cette méthode permet de connaître sa position
+     */
+    private void look()
     {
-    	System.out.println(currentRoom.getDescription());
-        System.out.print("Exits: ");
-        if(currentRoom.northExit != null)
-            System.out.print("north ");
-        if(currentRoom.eastExit != null)
-            System.out.print("east ");
-        if(currentRoom.southExit != null)
-            System.out.print("south ");
-        if(currentRoom.westExit != null)
-            System.out.print("west ");
-        if(currentRoom.northWestExit != null)
-            System.out.print("northwest ");
-        if(currentRoom.northEastExit != null)
-            System.out.print("northeast ");
-        if(currentRoom.southWestExit != null)
-            System.out.print("southwest ");
-        if(currentRoom.southEastExit != null)
-            System.out.print("southeast ");
-        System.out.println();
+        System.out.println("Vous êtes actuellement à " + currentRoom.getLongDescription());
+    }
+    
+    /**
+     * Cette méthode permet de manger
+     */
+     private void eat() 
+    {
+        System.out.println("Tu as mangé maintenant et tu n'as plus faim.");
+        
     }
 
     /** 

@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 /**
  * Class Room - a room in an adventure game.
  *
@@ -12,63 +14,75 @@
  * @author  Michael Kolling and David J. Barnes
  * @version 2006.03.30
  */
-public class Room 
+class Room
 {
-    public String description;
-    public Room northExit;
-    public Room southExit;
-    public Room eastExit;
-    public Room westExit;
-    public Room southWestExit;
-    public Room northWestExit;
-    public Room northEastExit;
-    public Room southEastExit;
-
-    /**
-     * Create a room described "description". Initially, it has
-     * no exits. "description" is something like "a kitchen" or
-     * "an open court yard".
-     * @param description The room's description.
-     */
-    public Room(String description) 
+	private String description;
+	private HashMap<String, Room> exits;
+/**
+* Create a room described "description". Initially, it
+* has no exits. "description" is something like "a
+* kitchen" or "an open court yard".
+*/
+	public Room(String description)
+	{
+		this.description = description;
+		exits = new HashMap<String, Room>();
+	}
+/**
+* Define the exits of this room. Every direction either
+* leads to another room or is null (no exit there).
+*/
+	public void setExits(Room north, Room east, Room south,Room west, Room northEast, Room northWest, Room southEast, Room southWest)
+	{
+		if(north != null)
+			exits.put("north", north);
+		if(east != null)
+			exits.put("east", east);
+		if(south != null)
+			exits.put("south", south);
+		if(west != null)
+			exits.put("west", west);
+		if(northEast != null)
+			exits.put("northeast", northEast);
+		if(northWest != null)
+			exits.put("northwest", northWest);
+		if(southEast != null)
+			exits.put("southeast", southEast);
+		if(southWest != null)
+			exits.put("southwest", southWest);
+	}
+	
+	 public void setExit(String direction, Room voisin)
+	    {
+	        exits.put(direction, voisin);
+	    }
+/**
+* Return the room that is reached if we go from this
+* room in direction "direction". If there is no room in
+* that direction, return null.
+*/
+	public Room getExit(String direction)
+	{
+		return exits.get(direction);
+	}
+	
+	public String getExitString()
     {
-        this.description = description;
+        StringBuilder returnString = new StringBuilder("Sorties:");
+        for ( String chaine : exits.keySet() )
+            returnString.append( " " +  chaine);
+        return description + ".\n" + returnString.toString();
     }
-
-    /**
-     * Define the exits of this room.  Every direction either leads
-     * to another room or is null (no exit there).
-     * @param north The north exit.
-     * @param east The east east.
-     * @param south The south exit.
-     * @param west The west exit.
-     */
-    public void setExits(Room north, Room east, Room south, Room west, Room northWest, Room northEast, Room southWest, Room southEast) 
-    {
-    	if(north != null)
-            northExit = north;
-        if(east != null)
-            eastExit = east;
-        if(south != null)
-            southExit = south;
-        if(west != null)
-            westExit = west;
-        if(northWest != null)
-        	northWestExit = northWest;
-        if(northEast != null)
-        	northEastExit = northEast;
-        if(southWest != null)
-        	southWestExit = southWest;
-        if(southEast != null)
-        	southEastExit = southEast;
-    }
-
-    /**
-     * @return The description of the room.
-     */
-    public String getDescription()
-    {
-        return description;
-    }
-
+	 public String getLongDescription()
+	 {
+	    return getExitString();
+	 }
+/**
+* Return the description of the room (the one that was
+* defined in the constructor).
+*/
+	public String getDescription()
+	{
+		return description;
+	}
 }

@@ -53,6 +53,10 @@ public class Command
     {
         return secondWord;
     }
+    /**
+    * Print out a list of valid command words.
+    */
+    
 
     /**
      * @return true if this command was not understood.
@@ -61,6 +65,7 @@ public class Command
     {
         return (commandWord == null);
     }
+    
 
     /**
      * @return true if the command has a second word.
