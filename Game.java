@@ -48,7 +48,7 @@ public class Game
         Room amazone_lily = new Room("Amazone_lily");
         Room skypia = new Room("Skypia");
         Room paris8 = new Room("Paris8");
-        Room rafel = new Room("Rafel, ~votre log pose n'arrête pas de s'agiter ...~");
+        Room rafel = new Room("Rafel, ~votre log pose n'arrï¿½te pas de s'agiter ...~");
         
         // initialise room exits
         cocoyashi.setExits(nooberland, null, null, null, null, null, null, null);
@@ -82,7 +82,7 @@ public class Game
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
-        System.out.println("Merci d'avoir joué, à très vite !");
+        System.out.println("Merci d'avoir jouï¿½, ï¿½ trï¿½s vite !");
     }
 
     /**
@@ -92,10 +92,10 @@ public class Game
     {
         System.out.println();
         System.out.println("Bienvenue dans One Piece treasure");
-        System.out.println("Imergez vous dans une odyssée de pirate purement ludique et palpitante");
+        System.out.println("Imergez vous dans une odyssï¿½e de pirate purement ludique et palpitante");
         System.out.println("Taper 'help' si vous avez besoin de messages.");
         System.out.println();
-        System.out.print("Bienvenue à " + currentRoom.getExitString());
+        System.out.print("Bienvenue ï¿½ " + currentRoom.getExitString());
         System.out.println();
     }
 
@@ -159,9 +159,9 @@ public class Game
         String direction = command.getSecondWord();
 
         // Try to leave current room.
-        Room nextRoom = null;
-        if(direction.equals("north")) {
-            nextRoom = currentRoom.getExit("north");
+        Room nextRoom = currentRoom.getExit(direction);
+        /*if(direction.equals("north")) {
+            nextRoom = currentRoom.northExit;
         }
         if(direction.equals("east")) {
             nextRoom = currentRoom.getExit("east");
@@ -182,32 +182,32 @@ public class Game
             nextRoom = currentRoom.getExit("southwest");
         }
         if(direction.equals("southeast")) {
-            nextRoom = currentRoom.getExit("southeast");
-        }
+            nextRoom = currentRoom.southEastExit;
+        }*/
 
         if (nextRoom == null) {
             System.out.println("There is no door!");
         }
         else {
             currentRoom = nextRoom;
-            System.out.print("Bienvenue à " + currentRoom.getExitString());
+            System.out.print("Bienvenue ï¿½ " + currentRoom.getExitString());
             System.out.println();	
         }
     }
     /**
-     * Cette méthode permet de connaître sa position
+     * Cette mï¿½thode permet de connaï¿½tre sa position
      */
     private void look()
     {
-        System.out.println("Vous êtes actuellement à " + currentRoom.getLongDescription());
+        System.out.println("Vous ï¿½tes actuellement ï¿½ " + currentRoom.getLongDescription());
     }
     
     /**
-     * Cette méthode permet de manger
+     * Cette mï¿½thode permet de manger
      */
      private void eat() 
     {
-        System.out.println("Tu as mangé maintenant et tu n'as plus faim.");
+        System.out.println("Tu as mangï¿½ maintenant et tu n'as plus faim.");
         
     }
 
