@@ -47,8 +47,8 @@ public class Game
         Room krakenland = new Room("Krakenland");
         Room amazone_lily = new Room("Amazone_lily");
         Room skypia = new Room("Skypia");
-        Room paris8 = new Room("Paris8");
-        Room rafel = new Room("Rafel, ~votre log pose n'arrï¿½te pas de s'agiter ...~");
+        Room paris8 = new Room("Paris8, il semble que vous avez découvert une île absente sur votre carte, et si vous l'exploriez ?");
+        Room rafel = new Room("Rafel, ~votre log pose n'arrête pas de s'agiter ...~");
         
         // initialise room exits
         cocoyashi.setExits(nooberland, null, null, null, null, null, null, null);
@@ -82,7 +82,7 @@ public class Game
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
-        System.out.println("Merci d'avoir jouï¿½, ï¿½ trï¿½s vite !");
+        System.out.println("Merci d'avoir joué, à très vite !");
     }
 
     /**
@@ -92,10 +92,13 @@ public class Game
     {
         System.out.println();
         System.out.println("Bienvenue dans One Piece treasure");
-        System.out.println("Imergez vous dans une odyssï¿½e de pirate purement ludique et palpitante");
-        System.out.println("Taper 'help' si vous avez besoin de messages.");
+        System.out.println("Imergez vous dans une odyssée de pirate purement ludique et palpitante");
+        System.out.println("Le but du jeu est de parcourir toute la mer afin de trouver le One Piece et devenir le roi des pirates !");
+        System.out.println("Les îles connues à ce jour sont les suivantes : \n"
+        		+ "Alabasta, Amazone Lily, Cocoyashi, Kalen, Krakenland, Nooberland, Ortopia, Raftel, Skypia, Water7, Wano-Kuni");
+        System.out.println("Tapez 'help' si vous avez besoin d'aide.");
         System.out.println();
-        System.out.print("Bienvenue ï¿½ " + currentRoom.getExitString());
+        System.out.print("Bienvenue à " + currentRoom.getExitString());
         System.out.println();
     }
 
@@ -137,11 +140,11 @@ public class Game
      */
     private void printHelp() 
     {
-        System.out.println("You are lost. You are alone. You wander");
-        System.out.println("around at the university.");
+        System.out.println("Vous êtes perdus sur cette vague mer");
+        //System.out.println("around at the university.");
         System.out.println();
-        System.out.println("Your command words are:");
-        System.out.println("   go quit help");
+        System.out.println("Vos mots de commande sont :");
+        System.out.println("   go quit eat look help");
     }
 
     /** 
@@ -152,16 +155,16 @@ public class Game
     {
         if(!command.hasSecondWord()) {
             // if there is no second word, we don't know where to go...
-            System.out.println("Go where?");
+            System.out.println("Où souhaitez-vous aller?");
             return;
         }
 
         String direction = command.getSecondWord();
 
         // Try to leave current room.
-        Room nextRoom = currentRoom.getExit(direction);
-        /*if(direction.equals("north")) {
-            nextRoom = currentRoom.northExit;
+        Room nextRoom = null;
+        if(direction.equals("north")) {
+            nextRoom = currentRoom.getExit("north");
         }
         if(direction.equals("east")) {
             nextRoom = currentRoom.getExit("east");
@@ -182,32 +185,32 @@ public class Game
             nextRoom = currentRoom.getExit("southwest");
         }
         if(direction.equals("southeast")) {
-            nextRoom = currentRoom.southEastExit;
-        }*/
+            nextRoom = currentRoom.getExit("southeast");
+        }
 
         if (nextRoom == null) {
-            System.out.println("There is no door!");
+            System.out.println("Il ny a pas de sortie!");
         }
         else {
             currentRoom = nextRoom;
-            System.out.print("Bienvenue ï¿½ " + currentRoom.getExitString());
+            System.out.print("Bienvenue à " + currentRoom.getExitString());
             System.out.println();	
         }
     }
     /**
-     * Cette mï¿½thode permet de connaï¿½tre sa position
+     * Cette méthode permet de connaître sa position
      */
     private void look()
     {
-        System.out.println("Vous ï¿½tes actuellement ï¿½ " + currentRoom.getLongDescription());
+        System.out.println("Vous êtes actuellement à " + currentRoom.getLongDescription());
     }
     
     /**
-     * Cette mï¿½thode permet de manger
+     * Cette méthode permet de manger
      */
      private void eat() 
     {
-        System.out.println("Tu as mangï¿½ maintenant et tu n'as plus faim.");
+        System.out.println("Tu as mangé maintenant et tu n'as plus faim.");
         
     }
 
