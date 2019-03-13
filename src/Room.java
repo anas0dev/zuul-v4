@@ -1,5 +1,4 @@
-import java.util.HashMap;
-
+package src;
 /**
  * Class Room - a room in an adventure game.
  *
@@ -14,75 +13,80 @@ import java.util.HashMap;
  * @author  Michael Kolling and David J. Barnes
  * @version 2006.03.30
  */
-class Room
-{
-	private String description;
-	private HashMap<String, Room> exits;
-/**
-* Create a room described "description". Initially, it
-* has no exits. "description" is something like "a
-* kitchen" or "an open court yard".
-*/
-	public Room(String description)
-	{
-		this.description = description;
-		exits = new HashMap<String, Room>();
-	}
-/**
-* Define the exits of this room. Every direction either
-* leads to another room or is null (no exit there).
-*/
-	public void setExits(Room north, Room east, Room south,Room west, Room northWest, Room northEast, Room southWest, Room southEast)
-	{
-		if(north != null)
-			exits.put("north", north);
-		if(east != null)
-			exits.put("east", east);
-		if(south != null)
-			exits.put("south", south);
-		if(west != null)
-			exits.put("west", west);
-		if(northEast != null)
-			exits.put("northeast", northEast);
-		if(northWest != null)
-			exits.put("northwest", northWest);
-		if(southEast != null)
-			exits.put("southeast", southEast);
-		if(southWest != null)
-			exits.put("southwest", southWest);
-	}
-	
-	 public void setExit(String direction, Room voisin)
-	    {
-	        exits.put(direction, voisin);
-	    }
-/**
-* Return the room that is reached if we go from this
-* room in direction "direction". If there is no room in
-* that direction, return null.
-*/
-	public Room getExit(String direction)
-	{
-		return exits.get(direction);
-	}
-	
-	public String getExitString()
+import java.util.HashMap;
+import java.util.Set;
+
+public class Room {
+
+    public String description;
+    private HashMap<String, Room> exits;
+    
+
+    /**
+     * Create a room described "description". Initially, it has
+     * no exits. "description" is something like "a kitchen" or
+     * "an open court yard".
+     * @param description The room's description.
+     */
+    public Room(String description) 
     {
-        StringBuilder returnString = new StringBuilder("Sorties:");
-        for ( String chaine : exits.keySet() )
-            returnString.append( " " +  chaine);
-        return description + ".\n" + returnString.toString();
+        this.description = description;
+        exits = new HashMap<String,Room>();
     }
-	 public String getLongDescription()
-	 {
-	    return getExitString();
-	 }
-/**
-* Return the description of the room (the one that was
-* defined in the constructor).
-*/
-	public String getDescription()
-	{
-		return description;
-	}
+
+    /**
+     * Define the exits of this room.  Every direction either leads
+     * to another room or is null (no exit there).
+     * @param north The north exit.
+     * @param east The east east.
+     * @param south The south exit.
+     * @param west The west exit.
+     */
+    public void setExits(String direction,Room neighbor){
+        exits.put(direction, neighbor);
+    }
+
+    /**
+    * Return a description of the room's exits,
+    * for example "Exits: north west".
+    * @return A description of the available exits.
+    */
+    public String getExitString(){
+        String returnString = "Exits:";
+        Set<String> keys = exits.keySet();
+        for(String exit : keys)
+            returnString += " " + exit;
+        return returnString;
+    }
+    /**
+    * Return the room that is reached if we go from this
+    * room in direction "direction". If there is no room in
+    * that direction, return null.
+    */
+    public Room getExit(String direction){
+        return exits.get(direction);
+    }
+    /**
+     * @return The description of the room.
+     */
+
+    /**
+    * Return a long description of this room, of the form:
+    * You are in the kitchen.
+    * Exits: north west
+    * @return A description of the room, including exits.
+    */
+    public String getLongDescription(){
+        return "You are " + description + ".\n" + getExitString();
+    }
+    /**
+    * Return a few description of this room, of the form:
+    * You are in the boat.
+    * @return A description of the room
+    */
+    public String getDescription()
+    {
+        return description;
+    }
+
 }
